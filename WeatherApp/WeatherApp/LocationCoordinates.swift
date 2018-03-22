@@ -9,6 +9,7 @@
 import Foundation
 
 struct LocationCoordinates {
-    let latitude:Double?
-    let longitude:Double?
+    var latitude:Double
+    var longitude:Double
+    var cityName:String
 }

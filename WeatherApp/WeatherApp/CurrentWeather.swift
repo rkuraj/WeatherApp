@@ -21,10 +21,14 @@ class CurrentWeather {
         static let summary = "summary"
     }
     
-    init(weatherDictionary:[String:Any]) {
-        self.temperature = weatherDictionary[WeatherDictKeys.temp] as? Int
+    init?(weatherDictionary:[String:Any]) {
+        let temp:Double = weatherDictionary[WeatherDictKeys.temp] as! Double
+        self.temperature = Int(temp)
+        
+        let appTemp:Double = weatherDictionary[WeatherDictKeys.apparentTemp] as! Double
+        self.apparentTemperature = Int(appTemp)
+        
         self.icon = weatherDictionary[WeatherDictKeys.icon] as? String
-        self.apparentTemperature = weatherDictionary[WeatherDictKeys.apparentTemp] as? Int
         self.summary = weatherDictionary[WeatherDictKeys.summary] as? String
     }
 }

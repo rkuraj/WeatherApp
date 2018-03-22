@@ -13,16 +13,15 @@ class LocationService {
 
     let locationAPIKey:String?
     let locationBaseURL:URL?
+    var locationCoordinates:LocationCoordinates?
     
     init(APIKey:String) {
         self.locationAPIKey = APIKey
         self.locationBaseURL = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?address=")
     }
     
-    func getCoordinationsForLocation(location:String) -> LocationCoordinates {
-        
-        var locationCoordinates:LocationCoordinates?
-        
+    func getCoordinationsForLocation(location:String, completion: @escaping (LocationCoordinates?) -> ()) {
+
         if let locationURL = URL(string: "\(locationBaseURL!)\(location)&key=\(locationAPIKey!)"){
             Alamofire.request(locationURL).responseJSON(completionHandler: {(response) in
                 if let responseDictionary = response.value as? [String:Any]{
@@ -33,14 +32,17 @@ class LocationService {
                                 let latitude = coordinates["lat"] as? Double
                                 let longitude = coordinates["lng"] as? Double
                                 
-                                locationCoordinates = LocationCoordinates(latitude:latitude, longitude:longitude)
+                                self.locationCoordinates = LocationCoordinates(latitude:latitude!, longitude:longitude!, cityName: location)
+                                
+                                completion(self.locationCoordinates)
+                                
+                            } else {
+                                completion(nil)
                             }
                         }
                     }
                 }
             })
         }
-        
-        return locationCoordinates!
     }
 }
