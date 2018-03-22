@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //APIKey: AIzaSyDeh0x2toF4izp0Sy_gM2-rHlB9P9Jzcjk
+        
+        let locationSer = LocationService(APIKey: "AIzaSyDeh0x2toF4izp0Sy_gM2-rHlB9P9Jzcjk")
+        let _:LocationCoordinates = locationSer.getCoordinationsForLocation(location: "Katowice")
+        
         return true
     }
 

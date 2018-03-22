@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class LocationService {
 
@@ -18,8 +19,28 @@ class LocationService {
         self.locationBaseURL = URL(string: "https://maps.googleapis.com/maps/api/geocode/json?address=")
     }
     
-    func getCoordinationsForLocation(location:String) {
-        let locationURL = URL(string: "\(locationBaseURL!)\(location)&key=\(locationAPIKey!)")
-        print(locationURL!)
+    func getCoordinationsForLocation(location:String) -> LocationCoordinates {
+        
+        var locationCoordinates:LocationCoordinates?
+        
+        if let locationURL = URL(string: "\(locationBaseURL!)\(location)&key=\(locationAPIKey!)"){
+            Alamofire.request(locationURL).responseJSON(completionHandler: {(response) in
+                if let responseDictionary = response.value as? [String:Any]{
+                    if let resultsDictionary = responseDictionary["results"] as? [[String:Any]]{
+                        for dictionary in resultsDictionary {
+                            let geometry = dictionary["geometry"] as? [String:Any]
+                            if let coordinates = geometry!["location"] as? [String:Any] {
+                                let latitude = coordinates["lat"] as? Double
+                                let longitude = coordinates["lng"] as? Double
+                                
+                                locationCoordinates = LocationCoordinates(latitude:latitude, longitude:longitude)
+                            }
+                        }
+                    }
+                }
+            })
+        }
+        
+        return locationCoordinates!
     }
 }

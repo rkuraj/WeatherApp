@@ -15,6 +15,7 @@
 		9A4E171E20630C0A0004AD98 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E171D20630C0A0004AD98 /* WeatherService.swift */; };
 		9A4E172020630C150004AD98 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E171F20630C150004AD98 /* LocationService.swift */; };
 		9A4E172220630C8F0004AD98 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E172120630C8F0004AD98 /* CurrentWeather.swift */; };
+		9AD615802063C4C20092C19D /* LocationCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6157F2063C4C20092C19D /* LocationCoordinates.swift */; };
 		B3AA43B5BA6E65E2ED144190 /* Pods_WeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3A3F0B5B0C9712D4FF8CD31 /* Pods_WeatherApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		9A4E171D20630C0A0004AD98 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		9A4E171F20630C150004AD98 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		9A4E172120630C8F0004AD98 /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		9AD6157F2063C4C20092C19D /* LocationCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinates.swift; sourceTree = "<group>"; };
 		F3A3F0B5B0C9712D4FF8CD31 /* Pods_WeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 				9A4E171D20630C0A0004AD98 /* WeatherService.swift */,
 				9A4E171F20630C150004AD98 /* LocationService.swift */,
 				9A4E172120630C8F0004AD98 /* CurrentWeather.swift */,
+				9AD6157F2063C4C20092C19D /* LocationCoordinates.swift */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				9A4E172220630C8F0004AD98 /* CurrentWeather.swift in Sources */,
 				9A4E171E20630C0A0004AD98 /* WeatherService.swift in Sources */,
 				9A4E172020630C150004AD98 /* LocationService.swift in Sources */,
+				9AD615802063C4C20092C19D /* LocationCoordinates.swift in Sources */,
 				9A4E170C2062DA020004AD98 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
