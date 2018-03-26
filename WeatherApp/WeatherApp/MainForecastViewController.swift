@@ -7,58 +7,60 @@
 //
 
 import UIKit
+import MapKit
 
-class MainForecastViewController: UIViewController {
+class MainForecastViewController: UIViewController, ForecastProtocol {
+    
+    //MARK: Outlets
     @IBOutlet weak var WeatherImageView: UIImageView!
     @IBOutlet weak var CityLabel: UILabel!
     @IBOutlet weak var WeatherSummaryLabel: UILabel!
     @IBOutlet weak var WeatherTemperatureLabel: UILabel!
+    @IBOutlet weak var WeatherApparentTemperatureLabel: UILabel!
+    @IBOutlet weak var CityTextField: UITextField!
     
+    //MARK: Properties
+    var cityName: String {
+        get {return self.CityLabel.text!}
+        set {self.CityLabel.text = newValue}
+    }
+    
+    var forecastSummary: String {
+        get {return self.WeatherSummaryLabel.text!}
+        set {self.WeatherSummaryLabel.text = newValue}
+    }
+    
+    var forecastIcon: UIImage {
+        get {return self.WeatherImageView.image!}
+        set {self.WeatherImageView.image = newValue}
+    }
+    
+    var forecastTemperature: String {
+        get {return self.WeatherTemperatureLabel.text!}
+        set {self.WeatherTemperatureLabel.text = newValue}
+    }
+    
+    var forecastAppTemperature: String {
+        get {return self.WeatherApparentTemperatureLabel.text!}
+        set {self.WeatherApparentTemperatureLabel.text = newValue}
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        let locationServ = LocationService(APIKey: APIKeys.GoogleAPIKey)
-        
-        locationServ.getCoordinationsForLocation(location: "Seattle", completion: {
-            (locationCoordinates) in
-
-            self.CityLabel.text = locationCoordinates?.cityName
-            
-            if let coordinates = locationCoordinates {
-                let forecastServ = WeatherService(APIKey: APIKeys.WeatherAPIKet)
-                forecastServ.getCurrentWeatherForCoordinates(coordinates: coordinates, completion: {
-                    (weather) in
-                    
-                    DispatchQueue.main.async {
-                        let presenter = WeatherPresenter()
-                        
-                        if let icon = weather?.icon {
-                            self.WeatherImageView.image = presenter.getWeatherIcon(icon: icon)
-                        }
-                        
-                        if let summary = weather?.summary {
-                            self.WeatherSummaryLabel.text = summary
-                        }
-                        
-                        if let temp = weather?.temperature {
-                            let celsiusTemp = Double(temp-32) / 1.8
-                            self.WeatherTemperatureLabel.text = String("\(Int(celsiusTemp))°C")
-                        }
-                    }
-                })
-            }
-        })
     }
     
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK: Actions
+    @IBAction func CheckWeatherForCity(_ sender: UIButton) {
+        
+        if let cityName = self.CityTextField.text {
+            let forecastService = ForecastService(cityName:cityName, forecastProtocol:self)
+            forecastService.getForecast()
+        } else {
+            return
+        }
+        
     }
-
-
 }
 
